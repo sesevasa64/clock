@@ -263,7 +263,7 @@ void __stdcall EXAMPLE_DLL setcurrentwindow( int window );
 // Double buffering support (winbgi.cpp)
 int __stdcall EXAMPLE_DLL getactivepage( );
 int __stdcall EXAMPLE_DLL getvisualpage( );
-void __stdcall EXAMPLE_DLL etactivepage( int page );
+void __stdcall EXAMPLE_DLL setactivepage( int page );
 void __stdcall EXAMPLE_DLL setvisualpage( int page );
 void __stdcall EXAMPLE_DLL swapbuffers( );
 

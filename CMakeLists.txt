@@ -8,5 +8,5 @@ find_library(lib_dll libwinbgim PATHS ${CMAKE_SOURCE_DIR}/lib)
 file(GLOB SRC ${PROJECT_SOURCE_DIR}/src/*.cpp 
               ${PROJECT_SOURCE_DIR}/include/*.hpp)
 
-add_executable(test src/main.cpp)
+add_executable(test ${SRC})
 target_link_libraries(test ${lib_dll})
