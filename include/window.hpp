@@ -1,6 +1,5 @@
 #pragma once
 #include <ctime>
-#include <random>
 #include <string>
 #include "../lib/winbgim.hpp"
 
