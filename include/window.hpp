@@ -3,15 +3,6 @@
 #include <string>
 #include "../lib/winbgim.hpp"
 
-/*
-window wd(800, 600, "title")
-while(wd.is_open()) {
-    // get user input
-    // update game logic
-    // draw on screen
-}
-*/
-
 class window {
 private:
     int width;
@@ -19,6 +10,7 @@ private:
     std::string title;
     int frame_id;
     bool open;
+    int id;
 public:
     void input(int key);
     void refresh();
@@ -51,9 +43,18 @@ bool window::is_open() {
 
 window::window(int width, int height, std::string title) 
 : width(width), height(height), title(title), open(true), frame_id(1) {
-    initwindow(this->width, this->height, title.c_str());
+    id = initwindow(this->width, this->height, title.c_str());
 }
 
 window::~window() {
-    closegraph();
+    closegraph(id);
 }
+
+/*
+window wd(800, 600, "title")
+while(wd.is_open()) {
+    // get user input
+    // update game logic
+    // draw on screen
+}
+*/

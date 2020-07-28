@@ -1,28 +1,19 @@
-#define _USE_MATH_DEFINES 
-
 #include <iostream>
 #include <vector>
 #include <memory>
 #include "../include/window.hpp"
 #include "../include/arrow.hpp"
+#include "../include/builder.hpp"
+#include "../include/settings.hpp"
 #include "../lib/winbgim.hpp"
 
 using namespace std;
 
-const int width = 800; 
-const int height = 600;
-const int radius = 200;
-const Point center(width / 2, height / 2);
-
 int main() {
-    const auto ratios = vector<int>({30, 6, 6});
-    auto array = vector<shared_ptr<movable_arrow>>(ratios.size());
-    for(int i = 0; i < ratios.size(); i++) {
-        array[i] = make_shared<movable_arrow>(center, radius, ratios[i]);
-    }
-
     window wd(width, height, "Clock");
-    
+
+    auto array = createArrows();
+
     while(wd.is_open()) {
         if(kbhit()) {
             wd.input(getch());
@@ -32,7 +23,9 @@ int main() {
 
         time_t ctm = time(nullptr);
         tm *curr = localtime(&ctm);
-        vector<int> time_array = {curr->tm_hour, curr->tm_min, curr->tm_sec};
+        vector<double> time_array = {double(curr->tm_hour + curr->tm_min / 60.0), 
+                                     double(curr->tm_min  + curr->tm_sec / 60.0), 
+                                     double(curr->tm_sec)};
         for(int i = 0; i < array.size(); i++) {
             array[i]->update(time_array[i]);
         }
