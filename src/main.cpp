@@ -5,17 +5,19 @@
 #include "../include/arrow.hpp"
 #include "../include/builder.hpp"
 #include "../include/settings.hpp"
+#include "../include/text.hpp"
 #include "../lib/winbgim.hpp"
 
 using namespace std;
 
-void drawClock(vector<shared_ptr<Line>>& lines, vector<shared_ptr<Arrow>>& arrows);
+void drawClock(line_array& lines, arrow_array& arrows, text_array& text);
 
 int main() {
     window wd(width, height, "Clock");
 
     auto arrows = createArrows();
     auto lines = createLines();
+    auto text = createText();
 
     while(wd.is_open()) {
         if(kbhit()) {
@@ -33,19 +35,22 @@ int main() {
             arrows[i]->update(time_array[i]);
         }
 
-        drawClock(lines, arrows);
+        drawClock(lines, arrows, text);
         wd.draw();
     }
     return 0;
 }
 
-void drawClock(vector<shared_ptr<Line>>& lines, vector<shared_ptr<Arrow>>& arrows) {
+void drawClock(line_array& lines, arrow_array& arrows, text_array& text) {
     circle(center.x, center.y, radius);
     for(auto line : lines) {
         line->draw();
     }
     for(auto& arrow : arrows) {
         arrow->draw();
+    }
+    for(auto& hour : text) {
+        hour->draw();
     }
 }
 
