@@ -9,6 +9,10 @@ struct Point {
     Point(int x, int y) : x(x), y(y) {}
 };
 
+Point operator+(const Point& p1, const Point& p2) {
+    return Point(p1.x + p2.x, p1.y + p2.y);
+}
+
 typedef int Color;
 double to_rad(double degree);
 
@@ -30,7 +34,11 @@ Line::Line(Point start, Point end)
 void Line::draw() {
     int temp = getcolor();
     setcolor(color);
+    linesettingstype ls;
+    getlinesettings(&ls);
+    setlinestyle(SOLID_LINE, 0, thickness);
     line(start.x, start.y, end.x, end.y);
+    setlinestyle(ls.linestyle, ls.upattern, ls.thickness);
     setcolor(temp);
 }
 
